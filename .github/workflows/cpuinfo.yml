@@ -8,6 +8,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Run a one-line script
+      - name: CPU
         run: cat /proc/cpuinfo
-
+        
+      - name: SSD
+        run: |
+          sync; dd if=/dev/zero of=tempfile bs=1M count=1024; sync
+          sudo /sbin/sysctl -w vm.drop_caches=3
+          dd if=tempfile of=/dev/null bs=1M count=1024
