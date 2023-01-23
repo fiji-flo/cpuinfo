@@ -16,15 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: echo env
+      - name: echo env 1
         env:
-          FOOBAR: inputs.foo || env.FOO
-        run: echo ${FOOBAR}
+          FOOBAR: ${{ inputs.foo || env.FOO }}
+        run: echo $FOOBAR
 
-      - name: echo 2
-        env:
-          FOOBAR: ${inputs.foo:-$FOO} 
-        run: echo ${FOOBAR}
+      - name: echo env 2
+
+        run: FOOBAR=${{ inputs.foo || env.FOO }} echo ${FOOBAR}
 
       - name: CPU
         run: cat /proc/cpuinfo
