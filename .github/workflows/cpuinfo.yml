@@ -23,7 +23,7 @@ jobs:
 
       - name: echo 2
         env:
-          FOOBAR: ${ ${{ intputs.foo }}:-$FOO} 
+          FOOBAR: ${ ${{ inputs.foo }}:-$FOO} 
         run: echo ${FOOBAR}
 
       - name: CPU
