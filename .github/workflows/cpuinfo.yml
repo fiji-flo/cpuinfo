@@ -1,13 +1,31 @@
 name: CI
 
+env:
+  FOO: "bar"
+
 on:
   workflow_dispatch:
+    inputs:
+      foo:
+        description: "bar"
+        required: false
+        default: ${FOO}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: echo env
+        env:
+          FOOBAR: ${{ inputs.foo || env.FOO }}
+        run: echo ${FOOBAR}
+
+      - name: echo 2
+        env:
+          FOOBAR: ${ ${{ intputs.foo }}:-$FOO} 
+        run: echo ${FOOBAR}
+
       - name: CPU
         run: cat /proc/cpuinfo
         
