@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: echo env
         env:
-          FOOBAR: ${{ inputs.foo || env.FOO }}
+          FOOBAR: ${ inputs.foo || env.FOO }
         run: echo ${FOOBAR}
 
       - name: echo 2
